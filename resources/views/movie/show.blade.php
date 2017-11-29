@@ -91,7 +91,7 @@
 							@endforeach
 					        
 					        <span class="ghost">|</span>
-					        <date>{{date("F jS,  Y", strtotime($movie->release_info))}}</date>
+					        <date>{{ humanize_date($movie->release_info) }}</date>
 					    </p>
 					</section>
 					<section class="media-synopsis">
@@ -292,25 +292,17 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-					<h5 class="modal-title" id="exampleModalLongTitle">{{ $movie-&gt;title }}</h5>
+					<h5 class="modal-title" id="exampleModalLongTitle">{{ $movie->title }}</h5>
 				</div>
 				<div class="modal-body">
 					<div class="form-group row">
 						<label class="col-sm-5 col-form-label">Library Status</label>
 						<div class="col-sm-7">
 							<select class="form-control">
-								<option>
-									Complete
-								</option>
-								<option>
-									Watching
-								</option>
-								<option>
-									Plan to Watch
-								</option>
-								<option>
-									Dropped
-								</option>
+								<option>Complete</option>
+								<option>Watching</option>
+								<option>Plan to Watch</option>
+								<option>Dropped</option>
 							</select>
 						</div>
 					</div>
@@ -329,21 +321,11 @@
 						<label class="col-sm-5 col-form-label">Rating</label>
 						<div class="col-sm-7">
 							<select class="form-control" id="exampleFormControlSelect1">
-								<option>
-									1
-								</option>
-								<option>
-									2
-								</option>
-								<option>
-									3
-								</option>
-								<option>
-									4
-								</option>
-								<option>
-									5
-								</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
 							</select>
 						</div>
 					</div>

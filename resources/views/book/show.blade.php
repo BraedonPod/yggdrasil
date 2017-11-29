@@ -71,7 +71,7 @@
 					        <span class="ghost">|</span>
 					        {{ $book->publishing_company }}
 					        <span class="ghost">|</span>
-					        <date>{{date("F jS,  Y", strtotime($book->published))}}</date>
+					        <date>{{ humanize_date($book->published) }}</date>
 					    </p>
 					</section>
 					<section class="media-info">

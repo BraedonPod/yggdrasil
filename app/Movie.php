@@ -4,11 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Favorite;
 use App\Library_entry;
 
 class Movie extends Model
 {
+    
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'release_info'
+    ];
+    
     /**
      * Get the tags for the movies.
      *
