@@ -17,6 +17,7 @@
         <li>npm install</li>
         <li>php artisan key:generate</li>
         <li>php artisan migrate</li>
+        <li>Use movies.sql on DB</li>
         <li>php artisan serve</li>
     </ol>
 </ol>
@@ -46,3 +47,7 @@
             <li>get profile pages working and add other pages</li>
         </ul>
 </ul>
+
+<h1>Old Schema</h1>
+
+![alt text](https://github.com/BraedonPod/yggdrasil/blob/master/schema.png?raw=true)
