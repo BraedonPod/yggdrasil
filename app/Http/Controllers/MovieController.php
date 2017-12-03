@@ -14,7 +14,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movies = Movie::orderBy('title', 'asc')->paginate(10);
+        $movies = Movie::orderBy('title', 'asc')->withCount('likes')->paginate(10);
         if(empty($movies)){abort(404);}
         return view('movie.index')->with('movies', $movies);
     }
@@ -28,6 +28,7 @@ class MovieController extends Controller
     {
         $movie = Movie::where('slug', $slug)->first();
         if(empty($movie)){abort(404);}
+        $movie->likes_count = $movie->likes()->count();
         return view('movie.show')->with('movie', $movie);
     }
 }

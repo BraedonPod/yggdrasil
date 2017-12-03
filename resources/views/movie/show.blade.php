@@ -138,6 +138,15 @@
 					        <div class="divider"></div>
 				        </p>
 					</section>
+					    <p class="mt-3">
+					      <like
+					        likes_count="{{ $movie->likes_count }}"
+					        liked="{{ $movie->isLiked() }}"
+					        item_id="{{ $movie->id }}"
+					        item_type="Movie"
+					        logged_in="{{ Auth::check() }}"
+					      ></like>
+					    </p>
 					
 					<hr />
 					

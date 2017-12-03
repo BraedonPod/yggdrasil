@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Favorite;
 use App\Library_entry;
+use App\Concern\Likeable;
 
 class Movie extends Model
 {
+    
+    use Likeable;
     
     /**
      * The attributes that should be mutated to dates.
@@ -19,6 +22,17 @@ class Movie extends Model
     protected $dates = [
         'release_info'
     ];
+    
+    
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+    }
     
     /**
      * Get the tags for the movies.
@@ -52,14 +66,6 @@ class Movie extends Model
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable');
-    }
-    
-    /**
-     * Get true/false of movie is fav.
-     */  
-    public function favorited()
-    {
-        return (bool) Favorite::where('user_id', Auth::id())->where('movie_id', $this->id)->first();
     }
     
     

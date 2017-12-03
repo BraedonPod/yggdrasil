@@ -21,3 +21,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/favorite/{movie}', 'Api\MovieController@favoriteMovie');
 Route::post('/unfavorite/{movie}', 'Api\MovieController@unFavoriteMovie');
 
+
+
+
+Route::namespace('Api')->group(function () {
+    Route::middleware('auth:api')->group(function () {
+        Route::post('/Movie/{movie}/likes', 'MovieLikesController@store')->name('movie.likes.store');
+        Route::delete('/Movie/{movie}/likes', 'MovieLikesController@destroy')->name('movie.likes.destroy');
+    });
+    
+    Route::post('/authenticate', 'Auth\AuthenticateController@authenticate')->name('authenticate');
+});

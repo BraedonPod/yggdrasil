@@ -38,6 +38,16 @@ if (token) {
 }
 
 /**
+ * API Token as common header
+ */
+
+let api_token = document.head.querySelector('meta[name="api-token"]');
+
+if (api_token) {
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + api_token.content;
+}
+
+/**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.

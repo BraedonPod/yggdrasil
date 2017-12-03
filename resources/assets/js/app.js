@@ -1,5 +1,6 @@
 require('./bootstrap');
 require('./ekko-lightbox');
+require('./app2');
 
 /* Light Box */
 $(document).on('click', '[data-toggle="library-status"]', function(event) {

@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -16,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password','slug',
+        'username', 'email', 'password','slug', 'api_token'
     ];
 
     /**
@@ -48,11 +47,15 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment', 'user_id');
     }
     
-    public function favorites()
+    /**
+     * Return the user's likes
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function likes()
     {
-        return $this->belongsToMany('App\Movie', 'favorites', 'user_id', 'movie_id')->withTimeStamps();
+        return $this->hasMany('App\Like', 'user_id');
     }
-    
     
     public function library_entries_movies()
     {

@@ -19,8 +19,14 @@ window.Vue = require('vue');
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 // Vue.component('favorite', require('./components/Favorite.vue'));
 // Vue.component('library', require('./components/Library.vue'));
-// Vue.component('follow', require('./components/Follow.vue'));
+Vue.component('like', require('./components/Like.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    
+    mounted() {
+    $('[data-confirm]').on('click', function () {
+      return confirm($(this).data('confirm'))
+    })
+  }
 });

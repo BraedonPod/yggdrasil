@@ -36,3 +36,16 @@ Route::get('/profile/{slug}/groups', 'ProfileController@library');
 //Comment Routes
 Route::post('/comment/create', 'CommentController@store');
 
+
+// Route::middleware('auth')->group(function () {
+//     Route::prefix('settings')->group(function () {
+//         Route::get('account', 'UsersController@edit')->name('users.edit');
+//         Route::match(['put', 'patch'], 'account', 'UsersController@update')->name('users.update');
+//         Route::get('password', 'UserPasswordsController@edit')->name('users.password');
+//         Route::match(['put', 'patch'], 'password', 'UserPasswordsController@update')->name('users.password.update');
+//     });
+// });
+
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->namespace('Admin')->as('admin.')->group(function () {
+
+});
