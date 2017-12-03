@@ -9,8 +9,8 @@
 		<span class="state-helper">
   			Status: <font color="#3097D1">{{ status }}</font>
 		</span>		
-
-		<button class="button button--secondary started-watching"value="Edit">Edit</button>
+		<button @click="showModal = true" class="button button--secondary started-watching">Edit</button>
+		<library-modal v-if="showModal" @close="showModal = false"></library-modal>
 	</div>
 	
 	<div v-else-if="status == 'Plan to Watch'" class="entry-state-status">
@@ -29,7 +29,8 @@
 		
 		<!--<button data-toggle="modal" data-target="#exampleModal" class="button button--secondary seen-this" value="Completed">Completed</button>-->
 		<button @click="updateStatus('Completed')" class="button button--secondary seen-this">Completed</button>
-		<button class="button button--secondary started-watching">Edit</button>
+		<button @click="showModal = true" class="button button--secondary started-watching">Edit</button>
+    <library-modal v-if="showModal" @close="showModal = false"></library-modal>
 		<button @click="updateStatus('Dropped')" class="button button--secondary dropped">Dropped</button>
 	</div>
 </template>
@@ -44,6 +45,7 @@ export default {
         isLoggedIn: this.logged_in,
         endpoint: "/api/" + this.item_type + "/" + this.item_id + "/status",
         isLoading: false,
+        showModal: false,
     };
   },
 

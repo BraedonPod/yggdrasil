@@ -17,11 +17,13 @@ window.Vue = require('vue');
  */
 
 Vue.component('like', require('./components/Like.vue'));
+Vue.component('library-modal', require('./components/library/LibraryModal.vue'));
 Vue.component('library-status', require('./components/library/LibraryStatus.vue'));
+
 
 const app = new Vue({
     el: '#app',
-    
+
     mounted() {
     $('[data-confirm]').on('click', function () {
       return confirm($(this).data('confirm'))

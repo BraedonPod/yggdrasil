@@ -1,12 +1,12 @@
 <template>
-  <span>
-    <i class="fa ml-2"
-       :class="[isLiked ? 'fa-heart text-danger' : 'fa-heart-o']"
+  <a :class="[isLiked ? 'liked' : 'disliked']">
+    <i
+       :class="[isLiked ? 'fa fa-heart' : 'fa fa-heart-o']"
        @click="toggleLike"
        style="user-select: none;"
        :style="{'cursor: pointer;' : isLoggedIn}"
        aria-hidden="true"></i> {{ count }}
-  </span>
+  </a>
 </template>
 
 <script>

@@ -709,3 +709,27 @@ a, a:hover, a:focus, a:visited {
         padding: 0 20px;
     }
 }
+
+//Library Entry
+a.liked {color: #dc3545;}
+a.liked:hover {color: grey;}
+a.disliked { color:grey;}
+a.disliked:hover { color:#dc3545;}
+
+
+.modal-enter {
+  opacity: 0;
+}
+.modal {
+    display: block;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
