@@ -37,37 +37,19 @@
 				</div>
 				<div class="library-state with-header">
 					<span class="entry-state-header"><span>Library Status</span></span>
-					<div class="entry-state-status" id="addEntry">
-						{{-- Later replace with vuejs comp --}}
-						@if($movie->status_entry() == NULL)
-							<button data-toggle="library-status" class="button button--secondary seen-this" value="Completed">Completed</button>
-							<button data-toggle="library-status" class="button button--secondary want-to-watch"value="Plan to Watch">Plan to Watch</button>
-							<button data-toggle="library-status" class="button button--secondary started-watching"value="Watching">Watching</button>
-						@else
-							<span class="state-helper">
-	          					Status: <font color="#3097D1">{{$movie->status_entry()->status}}</font>
-	        				</span>
-							@if($movie->status_entry()->status == 'Completed')
-								<button data-toggle="library-status" class="button button--secondary started-watching"value="Edit">Edit</button>
-							@endif
-								
-							@if($movie->status_entry()->status == 'Plan to Watch')	
-								<button data-toggle="library-status" class="button button--secondary seen-this" value="Completed">Completed</button>
-								<button data-toggle="library-status" class="button button--secondary started-watching"value="Watching">Watching</button>
-							@endif
-								
-							@if($movie->status_entry()->status == 'Watching')
-								<button data-toggle="modal" data-target="#exampleModal"
-								class="button button--secondary seen-this" value="Completed">Completed</button>
-								<button data-toggle="library-status" class="button button--secondary started-watching"value="Edit">Edit</button>
-								<button data-toggle="library-status" class="button button--secondary dropped"value="Dropped">Dropped</button>
-							@endif
-							
-							@if($movie->status_entry()->status == 'Dropped')
-								<button data-toggle="library-status" class="button button--secondary started-watching"value="Edit">Edit</button>
-							@endif
-						@endif
-					</div>
+					
+					@if($movie->status_entry() == NULL)
+						<?php $status = ''; ?>
+					@else
+						<?php $status = $movie->status_entry()->status; ?>
+					@endif
+
+					<library-status
+				        item_status="{{ $status }}"
+				        item_id="{{ $movie->id }}"
+				        item_type="Movie"
+				        logged_in="{{ Auth::check() }}"
+				    ></library-status>
 				</div>
 			</div>
 		</div>
@@ -91,7 +73,7 @@
 							@endforeach
 					        
 					        <span class="ghost">|</span>
-					        <date>{{ humanize_date($movie->release_info) }}</date>
+					        {{ humanize_date($movie->release_info) }}
 					    </p>
 					</section>
 					<section class="media-synopsis">

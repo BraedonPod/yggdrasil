@@ -23,9 +23,6 @@ Route::get('/books', 'BookController@index');
 Route::get('/book/{slug}', 'BookController@show');
 
 
-//Library Routes
-Route::post('/library','LibraryController@store');
-
 //Profile Routes
 Route::get('/profile/{slug}', 'ProfileController@index');
 Route::get('/profile/{slug}/library', 'ProfileController@library');

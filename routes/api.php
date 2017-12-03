@@ -28,6 +28,8 @@ Route::namespace('Api')->group(function () {
     Route::middleware('auth:api')->group(function () {
         Route::post('/Movie/{movie}/likes', 'MovieLikesController@store')->name('movie.likes.store');
         Route::delete('/Movie/{movie}/likes', 'MovieLikesController@destroy')->name('movie.likes.destroy');
+        
+        Route::resource('/Movie/{movie}/status', 'LibraryEntryController', ['only' => ['store', 'update']]);
     });
     
     Route::post('/authenticate', 'Auth\AuthenticateController@authenticate')->name('authenticate');

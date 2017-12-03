@@ -2063,3 +2063,37 @@ INSERT INTO `comments`(`id`, `body`, `user_id`, `parent_id`, `commentable_id`, `
 
 
 INSERT INTO `books` VALUES (1,'Boneshaker','0765318415','9780765318411','boneshaker','The Clockwork Century','Cherie Priest','Released',3,3.50,416,'In the early days of the Civil War, rumors of gold in the frozen Klondike brought hordes of newcomers to the Pacific Northwest. Anxious to compete, Russian prospectors commissioned inventor Leviticus Blue to create a great machine that could mine through Alaska’s ice. Thus was Dr. Blue’s Incredible Bone-Shaking Drill Engine born.\r\n\r\nBut on its first test run the Boneshaker went terribly awry, destroying several blocks of downtown Seattle and unearthing a subterranean vein of blight gas that turned anyone who breathed it into the living dead.\r\n\r\nNow it is sixteen years later, and a wall has been built to enclose the devastated and toxic city. Just beyond it lives Blue’s widow, Briar Wilkes. Life is hard with a ruined reputation and a teenaged boy to support, but she and Ezekiel are managing. Until Ezekiel undertakes a secret crusade to rewrite history.\r\n\r\nHis quest will take him under the wall and into a city teeming with ravenous undead, air pirates, criminal overlords, and heavily armed refugees. And only Briar can bring him out alive.','2009-09-29','Tor Books','https://images.gr-assets.com/books/1433161048l/1137215.jpg',NULL,NULL,NULL),(2,'Ready Player One','030788743X','9780307887436','ready-player-one',NULL,'Ernest Cline','Released',4,4.31,374,'In the year 2044, reality is an ugly place. The only time teenage Wade Watts really feels alive is when he\'s jacked into the virtual utopia known as the OASIS. Wade\'s devoted his life to studying the puzzles hidden within this world\'s digital confines, puzzles that are based on their creator\'s obsession with the pop culture of decades past and that promise massive power and fortune to whoever can unlock them. When Wade stumbles upon the first clue, he finds himself beset by players willing to kill to take this ultimate prize. The race is on, and if Wade\'s going to survive, he\'ll have to win—and confront the real world he\'s always been so desperate to escape.','2011-08-16','Crown Publishers','https://images.gr-assets.com/books/1333576872l/12600138.jpg',NULL,NULL,NULL);
+
+
+
+					<div class="entry-state-status" id="addEntry">
+						{{-- Later replace with vuejs comp --}}
+						@if($movie->status_entry() == NULL)
+							<button data-toggle="library-status" class="button button--secondary seen-this" value="Completed">Completed</button>
+							<button data-toggle="library-status" class="button button--secondary want-to-watch"value="Plan to Watch">Plan to Watch</button>
+							<button data-toggle="library-status" class="button button--secondary started-watching"value="Watching">Watching</button>
+						@else
+							<span class="state-helper">
+	          					Status: <font color="#3097D1">{{$movie->status_entry()->status}}</font>
+	        				</span>
+							@if($movie->status_entry()->status == 'Completed')
+								<button data-toggle="library-status" class="button button--secondary started-watching"value="Edit">Edit</button>
+							@endif
+								
+							@if($movie->status_entry()->status == 'Plan to Watch')	
+								<button data-toggle="library-status" class="button button--secondary seen-this" value="Completed">Completed</button>
+								<button data-toggle="library-status" class="button button--secondary started-watching"value="Watching">Watching</button>
+							@endif
+								
+							@if($movie->status_entry()->status == 'Watching')
+								<button data-toggle="modal" data-target="#exampleModal"
+								class="button button--secondary seen-this" value="Completed">Completed</button>
+								<button data-toggle="library-status" class="button button--secondary started-watching"value="Edit">Edit</button>
+								<button data-toggle="library-status" class="button button--secondary dropped"value="Dropped">Dropped</button>
+							@endif
+							
+							@if($movie->status_entry()->status == 'Dropped')
+								<button data-toggle="library-status" class="button button--secondary started-watching"value="Edit">Edit</button>
+							@endif
+						@endif
+					</div>
