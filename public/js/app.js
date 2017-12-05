@@ -43149,7 +43149,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(45)
 /* template */
 var __vue_template__ = __webpack_require__(46)
 /* template functional */
@@ -43191,7 +43191,130 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 45 */,
+/* 45 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["item_type", "item_id"],
+
+  data: function data() {
+    return {
+      endpoint: "/api/" + this.item_type + "/" + this.item_id + "/librarystatus",
+      isLoading: false,
+      movie: [],
+      libentry: [],
+      movie_status_templates: ['Completed', 'Watching', 'Plan to Watch', 'Dropped'],
+      book_status_templates: ['Completed', 'Reading', 'Plan to Read', 'Dropped']
+    };
+  },
+  mounted: function mounted() {
+    this.getStatus();
+  },
+
+
+  methods: {
+    getStatus: function getStatus() {
+      var _this = this;
+
+      this.isLoading = true;
+
+      axios.get(this.endpoint).then(function (response) {
+        _this.isLoading = false;
+        _this.movie = response.data[0];
+        _this.libentry = response.data[1];
+      }).catch(function (error) {
+        _this.isLoading = false;
+      });
+    }
+  }
+});
+
+/***/ }),
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43224,7 +43347,7 @@ var render = function() {
                 staticClass: "modal-title",
                 attrs: { id: "exampleModalLongTitle" }
               },
-              [_vm._v("Title")]
+              [_vm._v(_vm._s(_vm.movie.title) + " " + _vm._s(_vm.item_type))]
             )
           ]),
           _vm._v(" "),
@@ -43235,15 +43358,49 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7" }, [
-                _c("select", { staticClass: "form-control" }, [
-                  _c("option", [_vm._v("Complete")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Watching")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Plan to Watch")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Dropped")])
-                ])
+                _c(
+                  "select",
+                  { staticClass: "form-control" },
+                  _vm._l(_vm.movie_status_templates, function(status_template) {
+                    return _vm.item_type == "Movie"
+                      ? _c(
+                          "option",
+                          {
+                            domProps: {
+                              selected:
+                                status_template == _vm.libentry.status
+                                  ? "selected"
+                                  : ""
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t  " + _vm._s(status_template)
+                            )
+                          ]
+                        )
+                      : _vm._l(_vm.book_status_templates, function(
+                          status_template
+                        ) {
+                          return _c(
+                            "option",
+                            {
+                              domProps: {
+                                selected:
+                                  status_template == _vm.libentry.status
+                                    ? "selected"
+                                    : ""
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t  " + _vm._s(status_template)
+                              )
+                            ]
+                          )
+                        })
+                  })
+                )
               ])
             ]),
             _vm._v(" "),
@@ -43280,17 +43437,24 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: { id: "exampleFormControlSelect1" }
                   },
-                  [
-                    _c("option", [_vm._v("1")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("2")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("3")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("4")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("5")])
-                  ]
+                  _vm._l(5, function(count) {
+                    return _c(
+                      "option",
+                      {
+                        domProps: {
+                          selected:
+                            count == _vm.libentry.rating ? "selected" : ""
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n\t\t\t\t\t\t\t\t  " +
+                            _vm._s(count) +
+                            "\n\t\t\t\t\t\t\t\t"
+                        )
+                      ]
+                    )
+                  })
                 )
               ])
             ]),
@@ -43316,7 +43480,12 @@ var render = function() {
               _c("div", { staticClass: "col-sm-7" }, [
                 _c("input", {
                   staticClass: "form-control",
-                  attrs: { placeholder: "DD/MM/YYYY", type: "text" }
+                  attrs: {
+                    id: "datepicker",
+                    placeholder: "DD/MM/YYYY",
+                    type: "text"
+                  },
+                  domProps: { value: _vm.libentry.started_at }
                 })
               ])
             ]),
@@ -43329,7 +43498,11 @@ var render = function() {
               _c("div", { staticClass: "col-sm-7" }, [
                 _c("input", {
                   staticClass: "form-control",
-                  attrs: { placeholder: "DD/MM/YYYY", type: "text" }
+                  attrs: {
+                    id: "datepicker",
+                    placeholder: "DD/MM/YYYY",
+                    type: "text"
+                  }
                 })
               ])
             ]),
@@ -43340,15 +43513,19 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-7" }, [
-                _c("textarea", {
-                  staticClass: "form-control",
-                  staticStyle: {
-                    overflow: "hidden",
-                    "word-wrap": "break-word",
-                    resize: "none",
-                    height: "62px"
-                  }
-                })
+                _c(
+                  "textarea",
+                  {
+                    staticClass: "form-control",
+                    staticStyle: {
+                      overflow: "hidden",
+                      "word-wrap": "break-word",
+                      resize: "none",
+                      height: "62px"
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.libentry.notes))]
+                )
               ])
             ])
           ]),
@@ -43357,7 +43534,7 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn button--secondary",
+                staticClass: "btn",
                 staticStyle: { float: "left" },
                 attrs: { "aria-label": "Remove from Library" }
               },
@@ -43610,6 +43787,7 @@ var render = function() {
             _vm._v(" "),
             _vm.showModal
               ? _c("library-modal", {
+                  attrs: { item_type: _vm.item_type, item_id: _vm.item_id },
                   on: {
                     close: function($event) {
                       _vm.showModal = false
@@ -43705,6 +43883,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.showModal
                   ? _c("library-modal", {
+                      attrs: { item_type: _vm.item_type, item_id: _vm.item_id },
                       on: {
                         close: function($event) {
                           _vm.showModal = false

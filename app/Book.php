@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Library_entry;
+use App\Concern\Likeable;
 
 class Book extends Model
 {
+    use Likeable;
     
     /**
      * The attributes that should be mutated to dates.
@@ -16,6 +20,16 @@ class Book extends Model
     protected $dates = [
         'published'
     ];
+    
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+    }
     
     /**
      * Get the tags for the book.

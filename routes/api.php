@@ -29,7 +29,12 @@ Route::namespace('Api')->group(function () {
         Route::post('/Movie/{movie}/likes', 'MovieLikesController@store')->name('movie.likes.store');
         Route::delete('/Movie/{movie}/likes', 'MovieLikesController@destroy')->name('movie.likes.destroy');
         
+        Route::post('/Book/{book}/likes', 'BookLikesController@store')->name('book.likes.store');
+        Route::delete('/Book/{book}/likes', 'BookLikesController@destroy')->name('book.likes.destroy');
+        
         Route::resource('/Movie/{movie}/status', 'LibraryEntryController', ['only' => ['store', 'update']]);
+        
+        Route::get('/Movie/{movie}/librarystatus', 'LibraryEntryController@show');
     });
     
     Route::post('/authenticate', 'Auth\AuthenticateController@authenticate')->name('authenticate');

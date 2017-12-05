@@ -29,6 +29,7 @@ class MovieController extends Controller
         $movie = Movie::where('slug', $slug)->first();
         if(empty($movie)){abort(404);}
         $movie->likes_count = $movie->likes()->count();
+        //return view('comments.show')->with('comments', $movie->comments);
         return view('movie.show')->with('movie', $movie);
     }
 }

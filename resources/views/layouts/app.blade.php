@@ -91,6 +91,7 @@
     <!-- Scripts -->
     <script src="{{ secure_asset('js/app.js') }}"></script>
     
+    
     <script>
         $(document).on('click', '[data-toggle="lightbox"]', function(event) {
             event.preventDefault();

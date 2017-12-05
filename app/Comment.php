@@ -43,6 +43,6 @@ class Comment extends Model
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function replies() {
-        return $this->hasMany(Self::class, 'parent_id');
+        return $this->hasMany(Self::class, 'parent_id', 'id');
     }
 }

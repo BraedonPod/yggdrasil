@@ -10,7 +10,7 @@
   			Status: <font color="#3097D1">{{ status }}</font>
 		</span>		
 		<button @click="showModal = true" class="button button--secondary started-watching">Edit</button>
-		<library-modal v-if="showModal" @close="showModal = false"></library-modal>
+		<library-modal v-if="showModal" @close="showModal = false" :item_type="item_type" :item_id="item_id"></library-modal>
 	</div>
 	
 	<div v-else-if="status == 'Plan to Watch'" class="entry-state-status">
@@ -30,7 +30,7 @@
 		<!--<button data-toggle="modal" data-target="#exampleModal" class="button button--secondary seen-this" value="Completed">Completed</button>-->
 		<button @click="updateStatus('Completed')" class="button button--secondary seen-this">Completed</button>
 		<button @click="showModal = true" class="button button--secondary started-watching">Edit</button>
-    <library-modal v-if="showModal" @close="showModal = false"></library-modal>
+    <library-modal v-if="showModal" @close="showModal = false" :item_type="item_type" :item_id="item_id"></library-modal>
 		<button @click="updateStatus('Dropped')" class="button button--secondary dropped">Dropped</button>
 	</div>
 </template>

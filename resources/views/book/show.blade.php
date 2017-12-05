@@ -71,7 +71,7 @@
 					        <span class="ghost">|</span>
 					        {{ $book->publishing_company }}
 					        <span class="ghost">|</span>
-					        <date>{{ humanize_date($book->published) }}</date>
+					        {{ humanize_date($book->published) }}
 					    </p>
 					</section>
 					<section class="media-info">
@@ -104,6 +104,15 @@
 					            <div class="review-item-sub">User Review</div>
 					        </div>
 					        <div class="divider"></div>
+					        <div class="review-item">
+						      <like
+						        likes_count="{{ $book->likes_count }}"
+						        liked="{{ $book->isLiked() }}"
+						        item_id="{{ $book->id }}"
+						        item_type="Book"
+						        logged_in="{{ Auth::check() }}"
+						      ></like>
+					        </div>
 				        </p>
 					</section>
 					

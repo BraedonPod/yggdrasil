@@ -177,7 +177,7 @@
 													<div class="media-body">
 														<h4 class="media-heading"><a href="#">{{ $comment->author->username }}</a></h4>
 														<span class="comment-body">
-															<p>{{ $comment->body }}</p>
+															<p>{{ htmlspecialchars_decode($comment->body) }}</p>
 														</span>
 														<div class="stream-item-activity">
 															<a href="#" class="like-stream-item"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
@@ -210,66 +210,65 @@
 																</span>
 															</div>
 														</div>
-														 
 														<!-- Replies -->
 														@if ($comment->replies)
-														<ul class="media-list reply-list">
-															@foreach($comment->replies as $reply)
-																<li class="media new-comment">
-																	<div class="media-left">
-																		<a href="#">
-																			<div class="media-object lazy-image is-loaded">
-																				<img src="https://media.kitsu.io/users/avatars/8718/small.jpeg?1509765670">
-																			</div>
-																		</a>
-																	</div>
-																	<div class="media-body">
-																		<h4 class="media-heading"><a href="#">{{ $reply->author->username }}</a></h4>
-																		<span class="comment-body">
-																			<p>{{ $reply->body }}</p>
-																		</span>
-																		<div class="stream-item-activity">
-																			<a href="#" class="like-stream-item"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-																			<span class="sm-comment-count">{{ rand(1,10) }}</span>
-																			<span class="seperator"> - </span>
-																			<small class="comment-reply"><a data-toggle="reply" data-parent="{{ $comment->id }}" data-author="{{ $reply->author->username }}" href="#addcomment">Reply</a></small>
-																			<span class="seperator"> - </span>
-																			<small class="comment-time">
-																				<?php 
-																					$now = date("Y-m-d");
-																					$now = DateTime::createFromFormat('Y-m-d', $now);
-																					$posted = date("Y-m-d", strtotime($reply->created_at));
-																					$posted = DateTime::createFromFormat('Y-m-d', $posted);
-																					$days = $now->diff($posted)->format("%a");
-																					if($days > 1){ $days = $days." days ago"; }
-																					else {$days = $days." day ago";}
-																				?>
-																				{{ $days }}
-																			</small>
-																			<div class="stream-comment-options d-inline-block">
-																				<span class="more-wrapper">
-																					<a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="more-drop">
-																					  <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-																					</a>
-																					<div class="dropdown-menu">
-																					  <a href="#"class="dropdown-item">
-																						Copy Link to Post
-																					  </a>
-																					</div>
-																				</span>
+															<ul class="media-list reply-list">
+																@foreach($comment->replies as $reply)
+																	<li class="media new-comment">
+																		<div class="media-left">
+																			<a href="#">
+																				<div class="media-object lazy-image is-loaded">
+																					<img src="https://media.kitsu.io/users/avatars/8718/small.jpeg?1509765670">
+																				</div>
+																			</a>
+																		</div>
+																		<div class="media-body">
+																			<h4 class="media-heading"><a href="#">{{ $reply->author->username }}</a></h4>
+																			<span class="comment-body">
+																				<p>{{ htmlspecialchars_decode($reply->body) }}</p>
+																			</span>
+																			<div class="stream-item-activity">
+																				<a href="#" class="like-stream-item"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+																				<span class="sm-comment-count">{{ rand(1,10) }}</span>
+																				<span class="seperator"> - </span>
+																				<small class="comment-reply"><a data-toggle="reply" data-parent="{{ $comment->id }}" data-author="{{ $reply->author->username }}" href="#addcomment">Reply</a></small>
+																				<span class="seperator"> - </span>
+																				<small class="comment-time">
+																					<?php 
+																						$now = date("Y-m-d");
+																						$now = DateTime::createFromFormat('Y-m-d', $now);
+																						$posted = date("Y-m-d", strtotime($reply->created_at));
+																						$posted = DateTime::createFromFormat('Y-m-d', $posted);
+																						$days = $now->diff($posted)->format("%a");
+																						if($days > 1){ $days = $days." days ago"; }
+																						else {$days = $days." day ago";}
+																					?>
+																					{{ $days }}
+																				</small>
+																				<div class="stream-comment-options d-inline-block">
+																					<span class="more-wrapper">
+																						<a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="more-drop">
+																						  <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+																						</a>
+																						<div class="dropdown-menu">
+																						  <a href="#"class="dropdown-item">
+																							Copy Link to Post
+																						  </a>
+																						</div>
+																					</span>
+																				</div>
 																			</div>
 																		</div>
-																	</div>
-																</li>
-															@endforeach
-														</ul>
+																	</li>
+																@endforeach
+															</ul>
 														@endif
 													</div>
 												</li>
 											</ul>
 										</div>
 									</div>
-									@endif
+								@endif 
 						    @endforeach
 						</section>
 					@endif

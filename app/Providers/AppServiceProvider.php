@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
             'users' => 'App\User',
             'movie' => 'App\Movie',
             'book' => 'App\Book',
+            'comment' => 'App\Comment',
         ]);
     }
 

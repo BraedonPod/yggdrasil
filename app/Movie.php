@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\Favorite;
 use App\Library_entry;
 use App\Concern\Likeable;
 

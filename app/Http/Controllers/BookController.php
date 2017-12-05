@@ -29,6 +29,7 @@ class BookController extends Controller
     {
         $book = Book::where('slug', $slug)->first();
         if(empty($book)){abort(404);}
+        $book->likes_count = $book->likes()->count();
         return view('book.show')->with('book', $book);
     }
 }
