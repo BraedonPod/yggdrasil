@@ -3,17 +3,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Movie;
+use App\Book;
 use App\Library_entry;
 use Illuminate\Http\Request;
 
-class LibraryEntryController extends Controller
+class BookLibraryController extends Controller
 {
     
-    public function show(Request $request, Movie $movie)
+    public function show(Request $request, Book $book)
     {
-        $le = Library_entry::where('user_id', Auth::id())->where('source_id', $movie->id)->first();
-        $data[0] = $movie;
+        $le = Library_entry::where('user_id', Auth::id())->where('source_id', $book->id)->first();
+        $data[0] = $book;
         $data[1] = $le;
         return response()->json($data);
     }
@@ -23,15 +23,15 @@ class LibraryEntryController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request, Movie $movie)
+    public function store(Request $request, Book $book)
     {   $started = NULL;
         $finished = NULL;
-        if($request->status == "Watching"){ $started = date("Y-m-d H:i:s");}
+        if($request->status == "Reading"){ $started = date("Y-m-d H:i:s");}
         if($request->status == "Completed"){ $started = date("Y-m-d H:i:s");$finished = date("Y-m-d H:i:s");}
         $le = Library_entry::create([
             'user_id' => Auth::id(),
-            'source_id' => $movie->id,
-            'source_type' => 'Movie',
+            'source_id' => $book->id,
+            'source_type' => 'Book',
             'status' => $request->status,
             'started_at' => $started,
             'finished_at' => $finished
@@ -44,13 +44,13 @@ class LibraryEntryController extends Controller
      *
      * @return Response
      */
-    public function update(Request $request, Movie $movie, $status)
+    public function update(Request $request, Book $book, $status)
     {
         $started = NULL;
         $finished = NULL;
-        if($status == "Watching"){ $started = date("Y-m-d H:i:s");}
+        if($status == "Reading"){ $started = date("Y-m-d H:i:s");}
         if($status == "Completed"){ $started = date("Y-m-d H:i:s");$finished = date("Y-m-d H:i:s");}
-        $le = Library_entry::where('user_id', Auth::id())->where('source_id', $movie->id)->first()->update(
+        $le = Library_entry::where('user_id', Auth::id())->where('source_id', $book->id)->first()->update(
             [
                 'status' => $status, 
                 'started_at' => $started,

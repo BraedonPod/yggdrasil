@@ -32,9 +32,14 @@ Route::namespace('Api')->group(function () {
         Route::post('/Book/{book}/likes', 'BookLikesController@store')->name('book.likes.store');
         Route::delete('/Book/{book}/likes', 'BookLikesController@destroy')->name('book.likes.destroy');
         
-        Route::resource('/Movie/{movie}/status', 'LibraryEntryController', ['only' => ['store', 'update']]);
         
-        Route::get('/Movie/{movie}/librarystatus', 'LibraryEntryController@show');
+        Route::get('/Movie/{movie}/librarystatus', 'MovieLibraryController@show');
+        Route::resource('/Movie/{movie}/status', 'MovieLibraryController', ['only' => ['store', 'update']]);
+        
+        Route::get('/Book/{book}/librarystatus', 'BookLibraryController@show');
+        Route::resource('/Book/{book}/status', 'BookLibraryController', ['only' => ['store', 'update']]);
+        
+        
     });
     
     Route::post('/authenticate', 'Auth\AuthenticateController@authenticate')->name('authenticate');

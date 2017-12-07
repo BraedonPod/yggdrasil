@@ -37,14 +37,20 @@
 				</div>
 				<div class="library-state with-header">
 					<span class="entry-state-header"><span>Add to Library</span></span>
-					<div class="entry-state-status" id="addEntry">
-
-						<button class="button button--secondary seen-this">Completed</button>
-						<button class="button button--secondary want-to-watch">Plan to Read</button>
-						<button class="button button--secondary started-watching">Reading</button>
-						<button class="button button--secondary dropped">Dropped</button>
-
-					</div>
+					
+					@if($book->status_entry() == NULL)
+						<?php $status = ''; ?>
+					@else
+						<?php $status = $book->status_entry()->status; ?>
+					@endif
+					
+					<library-status
+				        item_status="{{ $status }}"
+				        item_id="{{ $book->id }}"
+				        item_type="Book"
+				        logged_in="{{ Auth::check() }}"
+				    ></library-status>
+				    
 				</div>
 			</div>
 		</div>

@@ -43361,28 +43361,12 @@ var render = function() {
                 _c(
                   "select",
                   { staticClass: "form-control" },
-                  _vm._l(_vm.movie_status_templates, function(status_template) {
-                    return _vm.item_type == "Movie"
-                      ? _c(
-                          "option",
-                          {
-                            domProps: {
-                              selected:
-                                status_template == _vm.libentry.status
-                                  ? "selected"
-                                  : ""
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n\t\t\t\t\t\t\t\t  " + _vm._s(status_template)
-                            )
-                          ]
-                        )
-                      : _vm._l(_vm.book_status_templates, function(
-                          status_template
-                        ) {
-                          return _c(
+                  [
+                    _vm._l(_vm.book_status_templates, function(
+                      status_template
+                    ) {
+                      return _vm.item_type == "Book"
+                        ? _c(
                             "option",
                             {
                               domProps: {
@@ -43398,8 +43382,33 @@ var render = function() {
                               )
                             ]
                           )
-                        })
-                  })
+                        : _vm._e()
+                    }),
+                    _vm._v(" "),
+                    _vm._l(_vm.movie_status_templates, function(
+                      status_template
+                    ) {
+                      return _vm.item_type == "Movie"
+                        ? _c(
+                            "option",
+                            {
+                              domProps: {
+                                selected:
+                                  status_template == _vm.libentry.status
+                                    ? "selected"
+                                    : ""
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t  " + _vm._s(status_template)
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    })
+                  ],
+                  2
                 )
               ])
             ]),
@@ -43502,7 +43511,8 @@ var render = function() {
                     id: "datepicker",
                     placeholder: "DD/MM/YYYY",
                     type: "text"
-                  }
+                  },
+                  domProps: { value: _vm.libentry.finished_at }
                 })
               ])
             ]),
@@ -43658,6 +43668,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["item_status", "item_type", "item_id", "logged_in"],
@@ -43717,7 +43763,6 @@ var render = function() {
           "button",
           {
             staticClass: "button button--secondary seen-this",
-            attrs: { value: "Completed" },
             on: {
               click: function($event) {
                 _vm.addStatus("Completed")
@@ -43731,28 +43776,26 @@ var render = function() {
           "button",
           {
             staticClass: "button button--secondary want-to-watch",
-            attrs: { value: "Plan to Watch" },
             on: {
               click: function($event) {
-                _vm.addStatus("Plan to Watch")
+                _vm.addStatus("Plan to Read")
               }
             }
           },
-          [_vm._v("Plan to Watch")]
+          [_vm._v("Plan to Read")]
         ),
         _vm._v(" "),
         _c(
           "button",
           {
             staticClass: "button button--secondary started-watching",
-            attrs: { value: "Watching" },
             on: {
               click: function($event) {
-                _vm.addStatus("Watching")
+                _vm.addStatus("Reading")
               }
             }
           },
-          [_vm._v("Watching")]
+          [_vm._v("Reading")]
         )
       ])
     : _vm.status == "Completed" || _vm.status == "Dropped"
@@ -43798,7 +43841,7 @@ var render = function() {
           ],
           1
         )
-      : _vm.status == "Plan to Watch"
+      : _vm.status == "Plan to Read"
         ? _c("div", { staticClass: "entry-state-status" }, [
             _c(
               "span",
@@ -43831,14 +43874,14 @@ var render = function() {
                 staticClass: "button button--secondary started-watching",
                 on: {
                   click: function($event) {
-                    _vm.updateStatus("Watching")
+                    _vm.updateStatus("Reading")
                   }
                 }
               },
-              [_vm._v("Watching")]
+              [_vm._v("Reading")]
             )
           ])
-        : _vm.status == "Watching"
+        : _vm.status == "Reading"
           ? _c(
               "div",
               { staticClass: "entry-state-status" },

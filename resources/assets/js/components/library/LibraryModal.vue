@@ -12,12 +12,12 @@
     						<label class="col-sm-5 col-form-label">Library Status</label>
     						<div class="col-sm-7">
     							<select class="form-control">
-    								<option v-if="item_type == 'Movie'"
-    								  v-for="status_template in movie_status_templates"
+    							  <option v-if="item_type == 'Book'"
+    								  v-for="status_template in book_status_templates"
     								  :selected="status_template == libentry.status ? 'selected' : ''">
     								  {{ status_template }}</option>
-    								<option v-else
-    								  v-for="status_template in book_status_templates"
+    								<option v-if="item_type == 'Movie'"
+    								  v-for="status_template in movie_status_templates"
     								  :selected="status_template == libentry.status ? 'selected' : ''">
     								  {{ status_template }}</option>
     							</select>
@@ -61,7 +61,7 @@
     					<div class="form-group row">
     						<label class="col-sm-5 col-form-label">Finished</label>
     						<div class="col-sm-7">
-    							<input class="form-control" id="datepicker" placeholder="DD/MM/YYYY" type="text">
+    							<input class="form-control" id="datepicker" :value="libentry.finished_at" placeholder="DD/MM/YYYY" type="text">
     						</div>
     					</div>
     					<div class="form-group row">

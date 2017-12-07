@@ -48,4 +48,12 @@ class Book extends Model
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
+    
+    /**
+     * Get status of movie
+     */ 
+    public function status_entry()
+    {
+        return Library_entry::select('status')->where('user_id', Auth::id())->where('source_id', $this->id)->first();
+    }
 }
