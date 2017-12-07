@@ -12,9 +12,9 @@ class UserPolicy
      */
     public function before(User $user)
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
+        // if ($user->isAdmin()) {
+        //     return true;
+        // }
     }
     /**
      * Determine whether the user can update the user.

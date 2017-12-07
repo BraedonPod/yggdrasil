@@ -61,7 +61,7 @@
                                     
                                     <li class="dropdown-divider"></li>
                                     
-                                    <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
+                                    <li><a href="{{ route('users.edit') }}"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
