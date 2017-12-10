@@ -186,16 +186,7 @@
 															<small class="comment-reply"><a data-toggle="reply" data-parent="{{ $comment->id }}" data-author="{{ $comment->author->username }}" href="#addcomment">Reply</a></small>
 															<span class="seperator"> - </span>
 															<small class="comment-time">
-																<?php 
-																	$now = date("Y-m-d");
-																	$now = DateTime::createFromFormat('Y-m-d', $now);
-																	$posted = date("Y-m-d", strtotime($comment->created_at));
-																	$posted = DateTime::createFromFormat('Y-m-d', $posted);
-																	$days = $now->diff($posted)->format("%a");
-																	if($days > 1){ $days = $days." days ago"; }
-																	else {$days = $days." day ago";}
-																?>
-																{{ $days }}
+																{{ compare_date($comment->created_at) }}
 															</small>
 															<div class="stream-comment-options d-inline-block">
 																<span class="more-wrapper">
@@ -234,16 +225,7 @@
 																				<small class="comment-reply"><a data-toggle="reply" data-parent="{{ $comment->id }}" data-author="{{ $reply->author->username }}" href="#addcomment">Reply</a></small>
 																				<span class="seperator"> - </span>
 																				<small class="comment-time">
-																					<?php 
-																						$now = date("Y-m-d");
-																						$now = DateTime::createFromFormat('Y-m-d', $now);
-																						$posted = date("Y-m-d", strtotime($reply->created_at));
-																						$posted = DateTime::createFromFormat('Y-m-d', $posted);
-																						$days = $now->diff($posted)->format("%a");
-																						if($days > 1){ $days = $days." days ago"; }
-																						else {$days = $days." day ago";}
-																					?>
-																					{{ $days }}
+																					{{ compare_date($reply->created_at) }}
 																				</small>
 																				<div class="stream-comment-options d-inline-block">
 																					<span class="more-wrapper">
